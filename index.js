@@ -10,6 +10,9 @@ const logger = morgan("dev");
 const PORT = 9999;
 const HOST = "localhost";
 
+// Routers
+const { weatherRouter } = require("./routers");
+
 app.use(express.static("public"));
 
 app.use(
@@ -19,6 +22,8 @@ app.use(
 );
 
 app.use(logger);
+
+app.use("/api/weather", weatherRouter);
 
 server.listen(PORT, HOST, () => {
   console.log(`Listening on http://${HOST}:${PORT}`);
