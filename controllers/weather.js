@@ -9,8 +9,8 @@ const getWeather = async (req, res) => {
   try {
     const resp = await axios.get(URL, { params });
     res.json(resp.data);
-  } catch (e) {
-    console.log(`There was an error in the weather api call : ${e}`);
+  } catch (err) {
+    res.json(err);
   }
 };
 
