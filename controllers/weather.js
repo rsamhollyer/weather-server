@@ -10,7 +10,8 @@ const getWeather = async (req, res) => {
     const resp = await axios.get(URL, { params });
     res.json(resp.data);
   } catch (err) {
-    res.json(err);
+    console.log(`error`);
+    res.status(500).json(err);
   }
 };
 
