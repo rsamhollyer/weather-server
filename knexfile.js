@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config({ path: "./.env" });
 
 module.exports = {
   development: {
@@ -12,7 +12,9 @@ module.exports = {
     migrations: {
       directory: __dirname + "/data/migrations",
     },
-    seeds: { directory: __dirname + "/data/seeds" },
+    seeds: {
+      directory: __dirname + "/data/seeds",
+    },
   },
 
   staging: {

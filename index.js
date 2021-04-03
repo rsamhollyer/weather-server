@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 // Getting Express ready
 const http = require("http");
 const express = require("express");
