@@ -11,25 +11,68 @@ const getWeather = async (req, res) => {
   const params = { q, units, appid: WEATHER_KEY };
   try {
     const resp = await axios.get(URL, { params });
-    res.json(resp.data);
+    res.status(200).json(resp.data);
   } catch (err) {
-    console.log(`error in getWeather`);
-    res.status(500).json(err);
+    console.log(`error in getWeather ${err}`);
+    res.json({
+      status: 400,
+      error: err.toString(),
+    });
   }
 };
 
 // Send saved searches to the front end state
 const getSearches = async (req, res) => {
   try {
-    const data = await db("weather").orderBy("created_at", "desc");
-    res.json(data);
+    const resp = await db("weather").orderBy("created_at", "desc");
+    res.status(200).json(resp);
+    console.log(`getsearches response`, resp);
   } catch (err) {
-    console.log(`error in getSearches`);
-    res.status(500).json(err);
+    console.log(`error in getSearches ${err}`);
+    res.json({
+      status: 400,
+      error: err.toString(),
+    });
+  }
+};
+
+//Save search to DB
+const saveSearch = async (req, res) => {
+  const { city, temp, humidity } = req.body;
+  try {
+    const resp = await db("weather").insert({ city, temp, humidity });
+    console.log(`saveSearch response`, resp);
+    res.json({
+      status: `Success`,
+    });
+  } catch (err) {
+    res.json({
+      status: 400,
+      error: err.toString(),
+    });
+  }
+};
+
+//Delete specific record
+const deleteSearch = async (req, res) => {
+  const { weatherId } = req.params;
+  try {
+    const resp = await db("weather").where("id", weatherId).del();
+    res.json({
+      status: `Success`,
+    });
+  } catch (err) {
+    console.log(`error in deleteSearch : ${err}`);
+    res.json({
+      status: 400,
+      error: err.toString(),
+    });
   }
 };
 
 module.exports = {
   getWeather,
   getSearches,
+  saveSearch,
+  deleteSearch,
 };
