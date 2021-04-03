@@ -20,7 +20,7 @@ app.use(
     extended: true,
   })
 );
-
+app.use(express.json());
 app.use(logger);
 
 app.use("/api/weather", weatherRouter);
