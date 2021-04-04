@@ -18,9 +18,9 @@ const getWeather = async (req, res) => {
     if (err.toString() === "Error: Request failed with status code 404") {
       res.status(404).send("This city was not found");
     } else {
-      res.status(500).send({
-        error: "Something went wrong with the request. Please try again.",
-      });
+      res
+        .status(500)
+        .send("Something went wrong with the request. Please try again.");
     }
   }
 };
@@ -30,13 +30,8 @@ const getSearches = async (req, res) => {
   try {
     const resp = await db("weather").orderBy("created_at", "desc");
     res.status(200).json(resp);
-    console.log(`getsearches response`, resp);
   } catch (err) {
-    console.log(`error in getSearches ${err}`);
-    res.json({
-      status: 400,
-      error: err.toString(),
-    });
+    res.status(500).send("Something went wrong, please try again.");
   }
 };
 
@@ -46,14 +41,9 @@ const saveSearch = async (req, res) => {
   try {
     const resp = await db("weather").insert({ city, temp, humidity });
     console.log(`saveSearch response`, resp);
-    res.json({
-      status: `Success`,
-    });
+    res.status(200).json(resp);
   } catch (err) {
-    res.json({
-      status: 400,
-      error: err.toString(),
-    });
+    res.status(500).send("Something went wrong, please try again.");
   }
 };
 
@@ -67,10 +57,7 @@ const deleteSearch = async (req, res) => {
     });
   } catch (err) {
     console.log(`error in deleteSearch : ${err}`);
-    res.json({
-      status: 400,
-      error: err.toString(),
-    });
+    res.status(500).send("Something went wrong, please try again.");
   }
 };
 
