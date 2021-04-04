@@ -40,7 +40,6 @@ const saveSearch = async (req, res) => {
   const { city, temp, humidity } = req.body;
   try {
     const resp = await db("weather").insert({ city, temp, humidity });
-    console.log(`saveSearch response`, resp);
     res.status(200).json(resp);
   } catch (err) {
     res.status(500).send("Something went wrong, please try again.");
@@ -56,7 +55,6 @@ const deleteSearch = async (req, res) => {
       status: `Success`,
     });
   } catch (err) {
-    console.log(`error in deleteSearch : ${err}`);
     res.status(500).send("Something went wrong, please try again.");
   }
 };
