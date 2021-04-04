@@ -9,15 +9,19 @@ const getWeather = async (req, res) => {
 
   const URL = `https://api.openweathermap.org/data/2.5/weather`;
   const params = { q, units, appid: WEATHER_KEY };
+
   try {
     const resp = await axios.get(URL, { params });
+
     res.status(200).json(resp.data);
   } catch (err) {
-    console.log(`error in getWeather ${err}`);
-    res.json({
-      status: 400,
-      error: err.toString(),
-    });
+    if (err.toString() === "Error: Request failed with status code 404") {
+      res.status(404).send("This city was not found");
+    } else {
+      res.status(500).send({
+        error: "Something went wrong with the request. Please try again.",
+      });
+    }
   }
 };
 

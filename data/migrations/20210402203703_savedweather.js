@@ -3,7 +3,7 @@ exports.up = function (knex) {
     table.increments().primary();
     table.string("city").notNullable();
     table.decimal("temp").notNullable();
-    table.decimal("humidity").notNullable();
+    table.integer("humidity").notNullable();
     table.timestamps(true, true);
   });
 };
