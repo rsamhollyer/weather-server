@@ -31,11 +31,17 @@ npm install
 
 ### Creating a .env
 
-To run the app, you will need a Postgres data base as well as an [OpenWeather](https://openweathermap.org/api) api key.
+To run the app, you will need a Postgres data base as well as an [Open Weather](https://openweathermap.org/api) api key.
 
 Create a .env file with the dist.env and populate it will the required information.
 ![Env](/public/assets/githubimages/Dist.png)
 
 ### Port
 
-The default port is 9999. If you need to change this for any reason, update the front end proxy information and rebuild the React client. Directions for that are in the client [repo](https://github.com/rsamhollyer/weather-client) .
+The default port is 9999. If you need to change this for any reason, update the front end proxy information and rebuild the React client. Directions for that are in the [client repo](https://github.com/rsamhollyer/weather-client) .
+
+### Run the server
+
+```
+npm run dev
+```
