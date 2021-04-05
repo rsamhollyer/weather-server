@@ -1,6 +1,6 @@
 const db = require("../data/db");
 const axios = require("axios");
-const { WEATHER_KEY } = process.env;
+const { OPEN_WEATHER_KEY } = process.env;
 
 // Gets passed the search params from React and hits the API end point
 // Returns the data json or an error
@@ -8,7 +8,7 @@ const getWeather = async (req, res) => {
   const { q, units } = req.query;
 
   const URL = `https://api.openweathermap.org/data/2.5/weather`;
-  const params = { q, units, appid: WEATHER_KEY };
+  const params = { q, units, appid: OPEN_WEATHER_KEY };
 
   try {
     const resp = await axios.get(URL, { params });
